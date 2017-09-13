@@ -36,7 +36,7 @@
             <div class="col-md-12 header">
                 <h1 align="center">Spring JDBC CRUD</h1>
             </div>
-            
+
             <div class="col-md-12 message">
                 <c:if test="${sm != null}">
                     <div class="alert alert-success alert-dismissable fade in">
@@ -70,11 +70,11 @@
                                 <div class="form-group">
                                     <label for="id">ID: </label>
                                     <input value="${student.id}" name="id" type="text" class="form-control" id="id" <c:if test="${id == null}">disabled="1"</c:if>" readonly="1">
-                                </div>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="name">Name:</label>
-                                    <input value="${student.name}" name="name" type="text" class="form-control" id="name">
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input value="${student.name}" name="name" type="text" class="form-control" id="name">
                                 </div>
 
                                 <div class="form-group">
@@ -131,12 +131,12 @@
                     </tbody>
                 </table>
             </div>
-                                
-                                <div class="col-md-12" style="text-align: center;">
-                                    &copy; Zubayer Ahamed
-                                    || <a href="https://www.youtube.com/channel/UC4vVj7lKO7H4FohB3lv9dzA" target="_blank">Youtube</a>  || <a href="http://www.facebook.com/zubayerahamed" target="_blank">Facebook</a>
-                                </div>
-                                
+
+            <div class="col-md-12" style="text-align: center;">
+                &copy; Zubayer Ahamed
+                || <a href="https://www.youtube.com/channel/UC4vVj7lKO7H4FohB3lv9dzA" target="_blank">Youtube</a>  || <a href="http://www.facebook.com/zubayerahamed" target="_blank">Facebook</a>
+            </div>
+
         </div>
 
     </body>
