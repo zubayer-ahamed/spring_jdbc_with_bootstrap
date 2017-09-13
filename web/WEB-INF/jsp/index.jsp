@@ -14,9 +14,16 @@
         <title>JSP Page</title>
         <spring:url value="/resources/css/bootstrap.css" var="bootstrapCSS"/>
         <spring:url value="/resources/css/font-awesome.css" var="fontawesomeCSS"/>
+        <spring:url value="/resources/js/jquery.min.js" var="jqueryJS"/>
+        <spring:url value="/resources/js/bootstrap.js" var="bootstrapJS"/>
         <link rel="stylesheet" type="text/css" href="${bootstrapCSS}"/>
         <link rel="stylesheet" type="text/css" href="${fontawesomeCSS}"/>
+        <script src="${jqueryJS}"></script>
+        <script src="${bootstrapJS}"></script>
         <style type="text/css">
+            .header, .message{
+                margin-bottom: 20px;
+            }
             th, td{
                 text-align: center;
             }
@@ -25,30 +32,67 @@
     <body>
 
         <div class="container">
-            <div class="student_form col-md-6">
+
+            <div class="col-md-12 header">
+                <h1 align="center">Spring JDBC CRUD</h1>
+            </div>
+            
+            <div class="col-md-12 message">
+                <c:if test="${sm != null}">
+                    <div class="alert alert-success alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Success!</strong> ${sm}
+                    </div>
+
+                </c:if>
+                <c:if test="${em != null}">
+                    <div class="alert alert-danger alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Error!</strong> ${em}
+                    </div>
+                </c:if>
+
+
+            </div>
+
+            <div class="student_form col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 align="center">Insert Student</h3>
+                        <h3 align="center"><i class="fa fa-user-plus"></i> Insert Student</h3>
                     </div>
                     <div class="panel-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="id">ID: </label>
-                                <input type="text" class="form-control" id="id">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="name">Name:</label>
-                                <input type="text" class="form-control" id="name">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="age">Age:</label>
-                                <input type="text" class="form-control" id="age">
-                            </div>
-                            
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
+                        <c:if test="${student.id != null}">
+                            <form action="<%= request.getContextPath()%>/updateStudent" method="post">
+                            </c:if>
+                            <c:if test="${student.id == null}">
+                                <form action="<%= request.getContextPath()%>/addStudent" method="post">
+                                </c:if>
+                                <div class="form-group">
+                                    <label for="id">ID: </label>
+                                    <input value="${student.id}" name="id" type="text" class="form-control" id="id" <c:if test="${id == null}">disabled="1"</c:if>" readonly="1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <input value="${student.name}" name="name" type="text" class="form-control" id="name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="age">Age:</label>
+                                    <input value="${student.age}" name="age" type="text" class="form-control" id="age">
+                                </div>
+
+                                <c:if test="${student.id != null}">
+                                    <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Update</button>
+                                    <a href="<%= request.getContextPath()%>" class="btn btn-primary pull-right"><i class="fa fa-user-plus"></i> New</a>
+                                </c:if>
+
+                                <c:if test="${student.id == null}">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-send"></i> Submit</button>
+                                </c:if>
+
+
+                            </form>
 
                     </div>
                     <div class="panel-footer">
@@ -57,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="header col-md-6">
+            <div class="header col-md-8">
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
                         <tr>
@@ -77,16 +121,22 @@
                                 <td>${row.name}</td>
                                 <td>${row.age}</td>
                                 <td>
-                                    <a href="" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
+                                    <a href="<%= request.getContextPath()%>/editStudent/${row.id}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                                    <a href="<%= request.getContextPath()%>/deleteStudent/${row.id}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
             </div>
+                                
+                                <div class="col-md-12" style="text-align: center;">
+                                    &copy; Zubayer Ahamed
+                                    || <a href="https://www.youtube.com/channel/UC4vVj7lKO7H4FohB3lv9dzA" target="_blank">Youtube</a>  || <a href="http://www.facebook.com/zubayerahamed" target="_blank">Facebook</a>
+                                </div>
+                                
         </div>
 
     </body>
